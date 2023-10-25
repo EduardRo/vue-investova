@@ -7,11 +7,11 @@ import GeneralDashboard from "./components/general/GeneralDashboard.vue";
     <router-link to="/" msg="Vite + Vue" style="padding-right: 50px"
       >Home</router-link
     >
-    <router-link to="/funds" style="padding-right: 50px">Funds</router-link>
-    <router-link to="/creations" style="padding-right: 50px"
+    <router-link to="/user" style="padding-right: 50px">Funds</router-link>
+    <router-link to="/administrator" style="padding-right: 50px"
       >Creations</router-link
     >
-    <router-link to="/register" style="padding-right: 50px"
+    <router-link to="/institutional" style="padding-right: 50px"
       >Register</router-link
     >
 
