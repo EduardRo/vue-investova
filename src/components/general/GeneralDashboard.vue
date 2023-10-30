@@ -150,9 +150,9 @@ import {
 // import { MenuIcon } from "@vue-heroicons/outline";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Dashboard", href: "/", current: true },
+  { name: "Funds", href: "/funds", current: false },
+  { name: "News", href: "/news", current: false },
+  { name: "Press Releases", href: "/pressreleseas", current: false },
 ];
 </script>
