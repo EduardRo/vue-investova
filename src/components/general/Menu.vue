@@ -46,7 +46,8 @@
         >
           <div>
             <a
-              v-bind:onClick="login"
+              href="#"
+              @click.prevent="toggleAuthModal"
               :class="[
                 actv ? 'bg-gray-100' : '',
                 'block px-4 py-2 text-sm text-gray-700',
@@ -75,11 +76,13 @@
           >{{ item.name }}</DisclosureButton
         >
       </div>
+      <app-auth></app-auth>
     </DisclosurePanel>
   </Disclosure>
 </template>
 
 <script setup>
+import { ref } from "vue";
 import {
   Disclosure,
   DisclosureButton,
@@ -91,7 +94,9 @@ import {
 } from "@headlessui/vue";
 // nu merge import { ArrowCircleRightIcon } from "@vue-hero-icons/outline";
 // import { MenuIcon } from "@vue-heroicons/outline";
-
+import { mapStores } from "pinia";
+import useModalStore from "../general/stores/model";
+import AppAuth from "../general/components/AppAuth.vue";
 const navigation = [
   { name: "Dashboard", href: "/", current: true },
   { name: "Funds", href: "/funds", current: false },
@@ -99,7 +104,13 @@ const navigation = [
   { name: "Press Releases", href: "/pressreleseas", current: false },
 ];
 const actv = true;
+const modalStore = useModalStore();
+
 function login() {
   console.log("this is login");
 }
+const toggleAuthModal = () => {
+  modalStore.isOpen.value = !modalStore.isOpen.value;
+  // You can access other properties and methods of modalStore here.
+};
 </script>
