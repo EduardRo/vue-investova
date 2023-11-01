@@ -1,6 +1,10 @@
 <template>
   <!-- Auth Modal -->
-  <div class="fixed z-10 inset-0 overflow-y-auto" id="modal" :class="hiddenClass">
+  <div
+    class="fixed z-10 inset-0 overflow-y-auto"
+    id="modal"
+    :class="hiddenClass"
+  >
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
@@ -9,7 +13,9 @@
       </div>
 
       <!-- This element is to trick the browser into centering the modal contents. -->
-      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
+        >&#8203;</span
+      >
 
       <div
         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
@@ -20,7 +26,10 @@
           <div class="flex justify-between items-center pb-4">
             <p class="text-2xl font-bold">Your Account</p>
             <!-- Modal Close Button -->
-            <div class="modal-close cursor-pointer z-50" @click="modalVisibility = false">
+            <div
+              class="modal-close cursor-pointer z-50"
+              @click="modalVisibility = false"
+            >
               <i class="fas fa-times"></i>
             </div>
           </div>
@@ -34,7 +43,7 @@
                 @click.prevent="tab = 'login'"
                 :class="{
                   'hover:text-white text-white bg-blue-600': tab === 'login',
-                  'hover:text-blue-600': tab === 'register'
+                  'hover:text-blue-600': tab === 'register',
                 }"
                 >Login</a
               >
@@ -46,7 +55,7 @@
                 @click.prevent="tab = 'register'"
                 :class="{
                   'hover:text-white text-white bg-blue-600': tab === 'register',
-                  'hover:text-blue-600': tab === 'login'
+                  'hover:text-blue-600': tab === 'login',
                 }"
                 >Register</a
               >
@@ -75,7 +84,7 @@
             </div>
             <button
               type="submit"
-              class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+              class="block w-full bg-purple-600 text-white h-16 py-1.5 px-3 rounded transition hover:bg-purple-700"
             >
               Submit
             </button>
@@ -132,14 +141,20 @@
             <!-- Password -->
             <div class="mb-3">
               <label class="inline-block mb-2">Password</label>
-              <vee-field name="password" :bails="false" v-slot="{ field, errors }">
+              <vee-field
+                name="password"
+                :bails="false"
+                v-slot="{ field, errors }"
+              >
                 <input
                   class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
                   type="password"
                   placeholder="Password"
                   v-bind="field"
                 />
-                <div class="text-red-600" v-for="error in errors" :key="error">{{ error }}</div>
+                <div class="text-red-600" v-for="error in errors" :key="error">
+                  {{ error }}
+                </div>
               </vee-field>
               <ErrorMessage class="text-red-600" name="password" />
             </div>
@@ -184,7 +199,7 @@
             </div>
             <button
               type="submit"
-              class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+              class="block w-full bg-purple-600 text-white h-16 py-1.5 px-3 rounded transition hover:bg-purple-700"
               :disabled="reg_in_submission"
             >
               Submit
@@ -197,49 +212,50 @@
 </template>
 
 <script>
-import { mapState, mapWritableState } from 'pinia'
-import useModalStore from '../stores/model'
-import { ErrorMessage } from 'vee-validate'
+import { mapState, mapWritableState } from "pinia";
+import useModalStore from "../stores/model.js";
+import { ErrorMessage } from "vee-validate";
+import "../../../assets/base.css";
 
 export default {
-  name: 'AppAuth',
+  name: "AppAuth",
   data() {
     return {
-      tab: 'login',
+      tab: "login",
       schema: {
-        name: 'required|min:3|max:100|alpha_spaces',
-        email: 'required|min:3|max:100|email',
-        age: 'required|min_value:18|max_value:99',
-        password: 'required|min:9|max:20|excluded:password',
-        confirm_password: 'passwords_mismatch:@password',
-        country: 'required|country_excluded:Russia',
-        tos: 'tos'
+        name: "required|min:3|max:100|alpha_spaces",
+        email: "required|min:3|max:100|email",
+        age: "required|min_value:18|max_value:99",
+        password: "required|min:9|max:20|excluded:password",
+        confirm_password: "passwords_mismatch:@password",
+        country: "required|country_excluded:Russia",
+        tos: "tos",
       },
-      userData: { country: 'USA' },
+      userData: { country: "USA" },
       reg_in_submission: false,
       reg_show_alert: false,
-      reg_alert_variant: 'bg-blue-500',
-      reg_alert_msg: 'Please wait dumb cunt! Your account is being created.'
-    }
+      reg_alert_variant: "bg-blue-500",
+      reg_alert_msg: "Please wait dumb cunt! Your account is being created.",
+    };
   },
   computed: {
-    ...mapState(useModalStore, ['hiddenClass']),
-    ...mapWritableState(useModalStore, { modalVisibility: 'isOpen' })
+    ...mapState(useModalStore, ["hiddenClass"]),
+    ...mapWritableState(useModalStore, { modalVisibility: "isOpen" }),
   },
   components: { ErrorMessage },
   methods: {
     register(values) {
-      this.reg_show_alert = true
-      this.reg_in_submission = true
-      this.reg_alert_variant = 'bg-blue-500'
-      this.reg_alert_msg = 'Please wait! Your account is being created.'
+      this.reg_show_alert = true;
+      this.reg_in_submission = true;
+      this.reg_alert_variant = "bg-blue-500";
+      this.reg_alert_msg = "Please wait! Your account is being created.";
       setTimeout(() => {
-        this.reg_alert_variant = 'bg-green-500'
-        this.reg_alert_msg = 'Success! Your account has been created.'
-      }, 5000)
+        this.reg_alert_variant = "bg-green-500";
+        this.reg_alert_msg = "Success! Your account has been created.";
+      }, 5000);
 
-      console.log(values)
-    }
-  }
-}
+      console.log(values);
+    },
+  },
+};
 </script>

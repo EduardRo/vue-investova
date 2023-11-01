@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
+  <Disclosure as="nav" class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -41,6 +41,7 @@
             </div>
           </div>
         </div>
+        suntem in Menu.vue
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
@@ -62,7 +63,7 @@
     <DisclosurePanel class="sm:hidden">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <DisclosureButton
-          v-for="item in navigation"
+          v-for="item in this.navigation"
           :key="item.name"
           as="a"
           :href="item.href"
@@ -76,41 +77,41 @@
           >{{ item.name }}</DisclosureButton
         >
       </div>
-      <app-auth></app-auth>
     </DisclosurePanel>
   </Disclosure>
 </template>
+<script>
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 
-<script setup>
-import { ref } from "vue";
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from "@headlessui/vue";
-// nu merge import { ArrowCircleRightIcon } from "@vue-hero-icons/outline";
-// import { MenuIcon } from "@vue-heroicons/outline";
 import { mapStores } from "pinia";
-import useModalStore from "../general/stores/model";
-import AppAuth from "../general/components/AppAuth.vue";
-const navigation = [
-  { name: "Dashboard", href: "/", current: true },
-  { name: "Funds", href: "/funds", current: false },
-  { name: "News", href: "/news", current: false },
-  { name: "Press Releases", href: "/pressreleseas", current: false },
-];
-const actv = true;
-const modalStore = useModalStore();
+import useModalStore from "../../general/stores/model";
 
-function login() {
-  console.log("this is login");
-}
-const toggleAuthModal = () => {
-  modalStore.isOpen.value = !modalStore.isOpen.value;
-  // You can access other properties and methods of modalStore here.
+export default {
+  name: "AppHeader",
+  data() {
+    return {
+      navigation: [
+        { name: "Dashboard", href: "/", current: true },
+        { name: "Funds", href: "/funds", current: false },
+        { name: "News", href: "/news", current: false },
+        { name: "Press Releases", href: "/pressreleseas", current: false },
+      ],
+      actv: true,
+    };
+  },
+  computed: { ...mapStores(useModalStore) },
+  methods: {
+    toggleAuthModal() {
+      this.modalStore.isOpen = !this.modalStore.isOpen;
+      this.modalStore.numberOf++;
+      console.log(this.modalStore.isOpen);
+      console.log(this.modalStore.numberOf);
+    },
+  },
+  components: {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+  },
 };
 </script>

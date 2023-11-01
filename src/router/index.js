@@ -3,19 +3,19 @@ import GeneralDashboard from "../components/general/GeneralDashboard.vue";
 import UserDashboard from "../components/user/UserDashboard.vue";
 import AdministratorDashboard from "../components/administrator/AdministratorDashboard.vue";
 import InstitutionalDashboard from "../components/institutional/InstitutionalDashboard.vue";
-import Menu from "../components/general/Menu.vue";
+import Dashboard from "../components/general/Dashboard.vue";
 import MenuComp from "../components/general/MenuComp.vue";
 
 
 const routes = [
   {
     path: "/",
-    component: GeneralDashboard,
+    component: Dashboard,
     
   },
   {
     path:"/menu", 
-    component:Menu,
+    component:GeneralDashboard,
   },
   {
     path:"/menucomposition", 
